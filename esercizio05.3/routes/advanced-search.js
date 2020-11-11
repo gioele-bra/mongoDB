@@ -5,13 +5,13 @@ const MongoClient = require('mongodb').MongoClient; //Importo la libreria mongod
 
 router.get('/actors/:name', function (req, res, next) {
     console.log(req.params); //Leggo i parametri passati all'url
-    title = req.params.name;
+    title = [req.params.name];
     const uri = 'mongodb+srv://gioele-bra:hGSdfpfQKAke3STS@cluster0.dbkxm.mongodb.net/sample_mflix?retryWrites=true&w=majority'
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
         const collection = client.db("sample_mflix").collection("movies"); //Mi connetto alla collection movies
         // eseguo una find sulla collection
-        collection.find({ actors: {$in:[title]} }).toArray((err, result) => {
+        collection.find({ cast: {$in:title} }).toArray((err, result) => {
             if (err) console.log(err.message); //Se c'è qualche errore lo stampo
             else res.send(result);
             client.close(); //Quando ho terminato la find chiudo la sessione con il db
@@ -28,7 +28,7 @@ router.get('/length_year/:length/:year', function (req, res, next) {
     client.connect(err => {
         const collection = client.db("sample_mflix").collection("movies"); //Mi connetto alla collection movies
         // perform actions on the collection object
-        collection.find({ year: num2, length: num1 }).toArray((err, result) => {
+        collection.find({ year: num2, runtime: num1 }).toArray((err, result) => {
             if (err) console.log(err.message); //Se c'è qualche errore lo stampo
             else { 
                 res.send(result);
