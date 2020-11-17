@@ -16,7 +16,7 @@ export class AppComponent {
 
   load10Movies()
   {
-    this.obs = this.http.get("https://3000-ae4061bd-74d5-4d12-8735-9c0cc7bc0671.ws-eu01.gitpod.io/users");
+    this.obs = this.http.get("https://3000-f1603f99-c6cc-4352-b431-d29bc574d2b0.ws-eu01.gitpod.io/users");
     this.obs.subscribe(this.getData);
   }
 

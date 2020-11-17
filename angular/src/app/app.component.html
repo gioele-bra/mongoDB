@@ -2,6 +2,7 @@
 
 <div class='card-columns'>
     <div *ngFor="let movie of results" class="card">
+        <div *ngIf="movie.poster != null" class="alert alert-info" role="alert">Immagine non presente</div>
         <img class='card-img-top' [src]="photoURL(movie.poster)">
         <div class="card-body text-center">
             <h4 class="card-title">{{movie.title}}</h4>
