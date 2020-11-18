@@ -77,4 +77,22 @@ router.get('/rating/:num', function (req, res, next) {
     
 });
 
+
+router.get('/genre/:genre', function (req, res, next) {
+    console.log(req.params); //Leggo i parametri passati all'url
+    genre = [req.params.genre];
+    const uri = 'mongodb+srv://gioele-bra:hGSdfpfQKAke3STS@cluster0.dbkxm.mongodb.net/sample_mflix?retryWrites=true&w=majority'
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+        const collection = client.db("sample_mflix").collection("movies"); //Mi connetto alla collection movies
+        // eseguo una find sulla collection
+        collection.find({ genres: {$in:genre} }).limit(10).toArray((err, result) => {
+            if (err) console.log(err.message); //Se c'è qualche errore lo stampo
+            else res.send(result);
+            client.close(); //Quando ho terminato la find chiudo la sessione con il db
+        }); //Eseguo la query e passo una funzione di callback
+
+    });
+});
+
 module.exports = router;

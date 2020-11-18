@@ -12,7 +12,7 @@ var advSearchRouter= require('./routes/advanced-search');
 
 var app = express();
 
-app.use(cors)
+app.use(new cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

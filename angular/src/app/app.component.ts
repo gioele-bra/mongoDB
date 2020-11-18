@@ -16,7 +16,7 @@ export class AppComponent {
 
   load10Movies()
   {
-    this.obs = this.http.get("https://3000-f1603f99-c6cc-4352-b431-d29bc574d2b0.ws-eu01.gitpod.io/users");
+    this.obs = this.http.get("https://3000-cf0666e5-0c11-4612-af62-697e74198fa2.ws-eu01.gitpod.io/users");
     this.obs.subscribe(this.getData);
   }
 
@@ -25,8 +25,29 @@ export class AppComponent {
   }
 
   photoURL(urltoSanitize) {
+    if(urltoSanitize == undefined){
+      return false;
+    }
     console.log(urltoSanitize);
     return this.sanitizer.bypassSecurityTrustUrl(urltoSanitize);
+    }
+
+    horrorMovies()
+    {
+      this.obs = this.http.get("https://3000-cf0666e5-0c11-4612-af62-697e74198fa2.ws-eu01.gitpod.io/movies/genre/Horror");
+      this.obs.subscribe(this.getData);
+    }
+
+    comedyMovies()
+    {
+      this.obs = this.http.get("https://3000-cf0666e5-0c11-4612-af62-697e74198fa2.ws-eu01.gitpod.io/movies/genre/Comedy");
+      this.obs.subscribe(this.getData);
+    }
+
+    dramaMovies()
+    {
+      this.obs = this.http.get("https://3000-cf0666e5-0c11-4612-af62-697e74198fa2.ws-eu01.gitpod.io/movies/genre/Drama");
+      this.obs.subscribe(this.getData);
     }
 
 }

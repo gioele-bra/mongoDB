@@ -1,9 +1,23 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <button (click)="horrorMovies()" class="nav-link active">Horror</button>
+    </li>
+    <li class="nav-item">
+      <button (click)="comedyMovies()" class="nav-link active" href="">Comedy</button>
+    </li>
+    <li class="nav-item">
+      <button (click)="dramaMovies()" class="nav-link active" href="">Drama</button>
+    </li>
+  </ul>
+</nav>
+
 <button class="btn btn-primary" (click)="load10Movies()">Carica 10 film</button>
 
 <div class='card-columns'>
     <div *ngFor="let movie of results" class="card">
-        <div *ngIf="movie.poster != null" class="alert alert-info" role="alert">Immagine non presente</div>
-        <img class='card-img-top' [src]="photoURL(movie.poster)">
+        <div *ngIf="photoURL(movie.poster) == false" class="alert alert-info" role="alert"><b>Info!</b> Immagine non presente</div>
+        <img *ngIf="photoURL(movie.poster) != false" class='card-img-top' [src]="photoURL(movie.poster)">
         <div class="card-body text-center">
             <h4 class="card-title">{{movie.title}}</h4>
             <p class="card-text">{{movie.fullplot}}</p>
